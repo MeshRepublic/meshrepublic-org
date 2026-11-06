@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mesh Republic</title>
+<meta name="description" content="The Mesh Republic, a novel by L. Ryan Hansen, and the working governance stack it describes: Kudzu constitutional AI, Autonym identity, and the Mandelbrots currency, anchored to Bitcoin.">
+<style>
+:root{
+  --ink:#101822;        /* deep indigo slate */
+  --parchment:#EAE4D3;  /* aged paper */
+  --faded:#A89F8C;      /* paper, dimmed */
+  --verdigris:#6FA08C;  /* aged copper, the republic's patina */
+  --seal:#2A3A4A;       /* panel ink */
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
+body{
+  background:var(--ink);color:var(--parchment);
+  font-family:"Charter","Bitstream Charter","Iowan Old Style","Palatino Linotype",Georgia,serif;
+  font-size:18px;line-height:1.65;
+}
+a{color:var(--verdigris);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--parchment)}
+:focus-visible{outline:2px solid var(--verdigris);outline-offset:3px}
+.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
+header.hero{padding:4.5rem 0 3rem}
+.hero-grid{display:flex;gap:2.5rem;align-items:center;flex-wrap:wrap}
+#mset{width:200px;height:200px;flex:0 0 auto;border:1px solid var(--seal)}
+.hero h1{font-size:clamp(2.4rem,7vw,3.6rem);line-height:1.05;font-weight:600;letter-spacing:-0.015em}
+.hero p.thesis{margin-top:1rem;font-size:1.15rem;color:var(--faded);max-width:32ch}
+.cta{margin-top:1.75rem;display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-block;padding:.7rem 1.3rem;border:1px solid var(--verdigris);color:var(--verdigris);text-decoration:none;font-size:1rem}
+.btn.primary{background:var(--verdigris);color:var(--ink);font-weight:600}
+.btn:hover{border-color:var(--parchment);color:var(--parchment)}
+.btn.primary:hover{background:var(--parchment);color:var(--ink)}
+section{padding:2.75rem 0;border-top:1px solid var(--seal)}
+h2{font-size:1.6rem;font-weight:600;margin-bottom:1rem;letter-spacing:-0.01em}
+p + p{margin-top:1rem}
+.muted{color:var(--faded)}
+.excerpt{border-left:3px solid var(--verdigris);padding:.25rem 0 .25rem 1.25rem;margin:1.25rem 0;font-style:italic}
+.denial{background:var(--seal);padding:1.1rem 1.25rem;margin:1.25rem 0;font-family:var(--mono);font-size:.85rem;line-height:1.7;overflow-x:auto}
+.denial b{color:var(--verdigris);font-weight:600}
+ul.plain{list-style:none}
+ul.plain li{padding:.6rem 0;border-bottom:1px solid var(--seal)}
+ul.plain li:last-child{border-bottom:none}
+ul.plain .what{color:var(--faded);font-size:.95rem}
+dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:.45rem 1.25rem}
+dl.gloss dt{color:var(--verdigris)}
+dl.gloss dd{color:var(--faded)}
+form.enroll{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem}
+form.enroll input[type=email]{
+  flex:1 1 16rem;padding:.7rem .9rem;font:inherit;font-size:1rem;
+  background:var(--ink);border:1px solid var(--verdigris);color:var(--parchment)}
+form.enroll input[type=email]::placeholder{color:var(--faded)}
+.hp{position:absolute;left:-5000px}
+#enroll-msg{margin-top:.75rem;color:var(--verdigris);min-height:1.5em}
+footer{padding:2.5rem 0 3.5rem;border-top:1px solid var(--seal);color:var(--faded);font-size:.95rem}
+footer p + p{margin-top:.5rem}
+@media (max-width:560px){
+  .hero-grid{gap:1.5rem}
+  #mset{width:140px;height:140px}
+  dl.gloss{grid-template-columns:1fr}
+  dl.gloss dd{margin-bottom:.5rem}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <canvas id="mset" width="400" height="400" aria-label="The Mandelbrot set, rendered live by this page from one iterated rule" role="img"></canvas>
+    <div>
+      <h1>The Mesh Republic</h1>
+      <p class="thesis">A novel about curing corruption by rebuilding governance from the self outward; and the working code that makes it more than a novel.</p>
+      <div class="cta">
+        <a class="btn primary" href="https://a.co/d/01r4qP5P">Get the book</a>
+        <a class="btn" href="#papers">Read the papers</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="wrap">
+  <h2>The premise</h2>
+  <p>Every top-down identity system eventually serves whoever sits at the top. <em>The Mesh Republic</em> inverts the stack: identity begins at the self, each citizen is their own certificate authority, money is minted from personhood rather than capital, and the whole record is witnessed by Bitcoin, the hardest ledger humans have built. The square to the left is the Mandelbrot set, drawn by your browser just now from one iterated rule; infinite unique structure from a single simple law is the entire thesis, and it is why the Republic's currency carries the name.</p>
+  <div class="excerpt">
+    <p>Replace this block with the Chapter One excerpt before launch.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>What is already real</h2>
+  <p>This project ships code, not just fiction. Kudzu, the constitutional AI described in the book, runs today: 23,000 lines of Elixir enforcing pluggable constitutions with fail-closed denial and a full audit trail. When its judge is unreachable, it refuses rather than permits. From the live logs:</p>
+  <div class="denial">PROPOSAL: Require government licenses for ordinary speech in public forums.<br>DECISION: <b>denied</b>, fail_closed:judge_not_configured, principle=<b>free_speech</b><br>"denying rather than permitting unjudged"</div>
+  <p class="muted">Next on the roadmap, in order: distilled governance constitutions, Autonym identity chains with Bitcoin anchoring, and the Mandelbrots provisional ledger. This page will show the Republic's latest Bitcoin anchor the day one exists.</p>
+</section>
+
+<section class="wrap" id="papers">
+  <h2>The canon</h2>
+  <ul class="plain">
+    <li><a href="https://github.com/meshrepublic/mesh-republic-whitepaper">The Mesh Republic whitepaper</a><div class="what">Governance, token economics, Bitcoin Layer 1 anchoring, the security ratchet.</div></li>
+    <li><a href="https://github.com/meshrepublic/Autonym">The Autonym whitepaper</a><div class="what">Self-sovereign identity; every person their own certificate authority; the enrollment oracle.</div></li>
+    <li><a href="https://github.com/meshrepublic/kudzu">Kudzu</a><div class="what">The constitutional AI platform, running in production. Elixir, BEAM, holographic memory.</div></li>
+  </ul>
+</section>
+
+<section class="wrap">
+  <h2>Speak Republic</h2>
+  <dl class="gloss">
+    <dt>Autonym</dt><dd>your self-named, self-rooted identity; soulbound, it hardens with time</dd>
+    <dt>mandelbrot</dt><dd>the currency; 1 mandelbrot = 100,000,000 brots</dd>
+    <dt>brot</dt><dd>the base unit; literally bread, your daily bread of the Republic</dd>
+    <dt>Kudzu</dt><dd>the constitutional AI that earns its keep and cannot be bought</dd>
+    <dt>the ratchet</dt><dd>anchoring that only relaxes under proven security, never by vote</dd>
+    <dt>VCP</dt><dd>Value Communications Protocol; the brot is a wire for value, not a warehouse</dd>
+  </dl>
+</section>
+
+<section class="wrap">
+  <h2>Enroll for dispatches</h2>
+  <p class="muted">Occasional letters from the Republic: build milestones, the first anchors, enrollment ceremonies when they begin. Your address is stored on infrastructure we control and is never shared or sold.</p>
+  <form class="enroll" id="enroll">
+    <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+    <input type="email" name="email" required placeholder="you@example.org" aria-label="Email address">
+    <button class="btn primary" type="submit">Enroll</button>
+  </form>
+  <p id="enroll-msg" role="status"></p>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>This page makes zero third-party requests. No analytics, no trackers, no cookies, no consent banner required. The fractal is computed on your machine; your reading habits are your own. That is the point of the book.</p>
+    <p>&copy; 2026 L. Ryan Hansen. The Mesh Republic.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var c=document.getElementById('mset'),x=c.getContext('2d'),W=c.width,H=c.height;
+  var img=x.createImageData(W,H),d=img.data;
+  // palette: ink -> indigo -> verdigris -> parchment
+  function pal(t){
+    var stops=[[16,24,34],[42,58,74],[111,160,140],[234,228,211]];
+    var s=t*(stops.length-1),i=Math.min(Math.floor(s),stops.length-2),f=s-i;
+    var a=stops[i],b=stops[i+1];
+    return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f, a[2]+(b[2]-a[2])*f];
+  }
+  var cx=-0.6,cy=0,scale=3.0,maxI=160;
+  for(var py=0;py<H;py++){
+    for(var px=0;px<W;px++){
+      var x0=cx+(px/W-0.5)*scale, y0=cy+(py/H-0.5)*scale;
+      var zx=0,zy=0,i=0;
+      while(zx*zx+zy*zy<=4&&i<maxI){var t=zx*zx-zy*zy+x0;zy=2*zx*zy+y0;zx=t;i++;}
+      var o=(py*W+px)*4;
+      if(i===maxI){d[o]=16;d[o+1]=24;d[o+2]=34;}
+      else{var sm=i-Math.log2(Math.log2(zx*zx+zy*zy)/2||1)||i;
+           var col=pal(Math.pow(Math.min(sm/maxI*2.4,1),0.5));
+           d[o]=col[0];d[o+1]=col[1];d[o+2]=col[2];}
+      d[o+3]=255;
+    }
+  }
+  x.putImageData(img,0,0);
+})();
+(function(){
+  var f=document.getElementById('enroll'),m=document.getElementById('enroll-msg');
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var email=f.email.value.trim(), hp=f.website.value;
+    m.textContent='';
+    fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email:email,website:hp})})
+    .then(function(r){return r.json().catch(function(){return{}}).then(function(j){return{ok:r.ok,j:j}})})
+    .then(function(res){
+      if(res.ok){m.textContent='Enrolled. Welcome to the roll.';f.reset();}
+      else{m.textContent=(res.j&&res.j.error)||'The scribe is unavailable. Try again shortly.';}
+    })
+    .catch(function(){m.textContent='The scribe is unavailable. Try again shortly.';});
+  });
+})();
+</script>
+</body>
+</html>
