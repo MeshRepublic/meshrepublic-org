@@ -1,185 +1,424 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Mesh Republic</title>
 <meta name="description" content="The Mesh Republic, a novel by L. Ryan Hansen, and the working governance stack it describes: Kudzu constitutional AI, Autonym identity, and the Mandelbrots currency, anchored to Bitcoin.">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0f14'/%3E%3Ccircle cx='17' cy='16' r='8' fill='%237fd1b9'/%3E%3Ccircle cx='8' cy='16' r='4' fill='%237fd1b9'/%3E%3C/svg%3E">
 <style>
-:root{
-  --ink:#101822;        /* deep indigo slate */
-  --parchment:#EAE4D3;  /* aged paper */
-  --faded:#A89F8C;      /* paper, dimmed */
-  --verdigris:#6FA08C;  /* aged copper, the republic's patina */
-  --seal:#2A3A4A;       /* panel ink */
-  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}
-body{
-  background:var(--ink);color:var(--parchment);
-  font-family:"Charter","Bitstream Charter","Iowan Old Style","Palatino Linotype",Georgia,serif;
-  font-size:18px;line-height:1.65;
-}
-a{color:var(--verdigris);text-decoration-thickness:1px;text-underline-offset:3px}
-a:hover{color:var(--parchment)}
-:focus-visible{outline:2px solid var(--verdigris);outline-offset:3px}
-.wrap{max-width:46rem;margin:0 auto;padding:0 1.25rem}
-header.hero{padding:4.5rem 0 3rem}
-.hero-grid{display:flex;gap:2.5rem;align-items:center;flex-wrap:wrap}
-#mset{width:200px;height:200px;flex:0 0 auto;border:1px solid var(--seal)}
-.hero h1{font-size:clamp(2.4rem,7vw,3.6rem);line-height:1.05;font-weight:600;letter-spacing:-0.015em}
-.hero p.thesis{margin-top:1rem;font-size:1.15rem;color:var(--faded);max-width:32ch}
-.cta{margin-top:1.75rem;display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-block;padding:.7rem 1.3rem;border:1px solid var(--verdigris);color:var(--verdigris);text-decoration:none;font-size:1rem}
-.btn.primary{background:var(--verdigris);color:var(--ink);font-weight:600}
-.btn:hover{border-color:var(--parchment);color:var(--parchment)}
-.btn.primary:hover{background:var(--parchment);color:var(--ink)}
-section{padding:2.75rem 0;border-top:1px solid var(--seal)}
-h2{font-size:1.6rem;font-weight:600;margin-bottom:1rem;letter-spacing:-0.01em}
-p + p{margin-top:1rem}
-.muted{color:var(--faded)}
-.excerpt{border-left:3px solid var(--verdigris);padding:.25rem 0 .25rem 1.25rem;margin:1.25rem 0;font-style:italic}
-.denial{background:var(--seal);padding:1.1rem 1.25rem;margin:1.25rem 0;font-family:var(--mono);font-size:.85rem;line-height:1.7;overflow-x:auto}
-.denial b{color:var(--verdigris);font-weight:600}
-ul.plain{list-style:none}
-ul.plain li{padding:.6rem 0;border-bottom:1px solid var(--seal)}
-ul.plain li:last-child{border-bottom:none}
-ul.plain .what{color:var(--faded);font-size:.95rem}
-dl.gloss{display:grid;grid-template-columns:max-content 1fr;gap:.45rem 1.25rem}
-dl.gloss dt{color:var(--verdigris)}
-dl.gloss dd{color:var(--faded)}
-form.enroll{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.25rem}
-form.enroll input[type=email]{
-  flex:1 1 16rem;padding:.7rem .9rem;font:inherit;font-size:1rem;
-  background:var(--ink);border:1px solid var(--verdigris);color:var(--parchment)}
-form.enroll input[type=email]::placeholder{color:var(--faded)}
-.hp{position:absolute;left:-5000px}
-#enroll-msg{margin-top:.75rem;color:var(--verdigris);min-height:1.5em}
-footer{padding:2.5rem 0 3.5rem;border-top:1px solid var(--seal);color:var(--faded);font-size:.95rem}
-footer p + p{margin-top:.5rem}
-@media (max-width:560px){
-  .hero-grid{gap:1.5rem}
-  #mset{width:140px;height:140px}
-  dl.gloss{grid-template-columns:1fr}
-  dl.gloss dd{margin-bottom:.5rem}
-}
+  :root {
+    --bg: #0b0f14;
+    --bg-2: #10161e;
+    --line: #1f2a36;
+    --text: #e6ebf0;
+    --muted: #93a1b1;
+    --faint: #5c6b7a;
+    --accent: #7fd1b9;
+    --accent-ink: #06201a;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --max: 1120px;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* ---------- nav ---------- */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(11,15,20,.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .brand { font-family: var(--mono); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .brand b { color: var(--text); font-weight: 600; }
+  .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 24px; }
+  .nav li a { font-size: 14px; color: var(--muted); }
+  .nav li a:hover { color: var(--text); text-decoration: none; }
+  @media (max-width: 640px) { .nav ul { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+  #fractal {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: block;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(90deg, rgba(11,15,20,.92) 0%, rgba(11,15,20,.70) 38%, rgba(11,15,20,.05) 62%, rgba(11,15,20,0) 100%),
+      linear-gradient(180deg, rgba(11,15,20,0) 80%, rgba(11,15,20,1) 100%);
+    pointer-events: none;
+  }
+  @media (max-width: 820px) {
+    .hero::after {
+      background:
+        linear-gradient(180deg, rgba(11,15,20,.35) 0%, rgba(11,15,20,.78) 35%, rgba(11,15,20,.78) 75%, rgba(11,15,20,1) 100%);
+    }
+  }
+  .hero .wrap {
+    position: relative; z-index: 1;
+    min-height: min(88vh, 760px);
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 72px; padding-bottom: 72px;
+  }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin: 0 0 20px;
+  }
+  h1 {
+    font-size: clamp(44px, 7.2vw, 88px);
+    line-height: .98; letter-spacing: -.03em; font-weight: 700;
+    margin: 0 0 24px; max-width: 12ch;
+  }
+  .lede {
+    font-size: clamp(18px, 2vw, 22px); line-height: 1.5;
+    color: var(--muted); max-width: 32ch; margin: 0 0 36px;
+  }
+  .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 22px; border-radius: 6px;
+    font-size: 15px; font-weight: 600; line-height: 1;
+    border: 1px solid transparent; cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .btn:hover { text-decoration: none; }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { background: #99e0cb; }
+  .btn-ghost { color: var(--text); border-color: var(--line); background: rgba(16,22,30,.6); }
+  .btn-ghost:hover { border-color: var(--muted); }
+  .byline { margin-top: 40px; font-family: var(--mono); font-size: 12px; color: var(--faint); letter-spacing: .06em; }
+  .byline span { color: var(--muted); }
+
+  /* ---------- sections ---------- */
+  section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  .grid { display: grid; grid-template-columns: 260px 1fr; gap: 48px; align-items: start; }
+  @media (max-width: 820px) { .grid { grid-template-columns: 1fr; gap: 20px; } section { padding: 64px 0; } }
+  .label {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--accent); margin: 0;
+    position: sticky; top: 80px;
+  }
+  .label small { display: block; color: var(--faint); letter-spacing: .1em; margin-top: 6px; text-transform: none; }
+  h2 { font-size: clamp(26px, 3vw, 34px); line-height: 1.15; letter-spacing: -.02em; margin: 0 0 20px; font-weight: 650; }
+  .prose p { margin: 0 0 20px; color: var(--text); max-width: 62ch; font-size: 18px; }
+  .prose p:last-child { margin-bottom: 0; }
+  .prose em { color: var(--accent); font-style: italic; }
+  .placeholder {
+    border: 1px dashed var(--line); border-radius: 6px; padding: 14px 16px;
+    color: var(--faint); font-family: var(--mono); font-size: 13px; max-width: 62ch;
+  }
+
+  /* log block */
+  .log {
+    margin: 28px 0 24px; max-width: 62ch;
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 8px;
+    padding: 18px 20px; font-family: var(--mono); font-size: 13.5px; line-height: 1.7;
+    color: var(--muted); white-space: pre-wrap; word-break: break-word;
+  }
+  .log .k { color: var(--faint); }
+  .log .d { color: #ff8a7a; font-weight: 700; }
+  .log .p { color: var(--accent); font-weight: 700; }
+  .log .q { color: var(--text); }
+
+  /* canon cards */
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  @media (max-width: 820px) { .cards { grid-template-columns: 1fr; } }
+  .card {
+    display: block; padding: 22px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--bg-2); color: var(--text); transition: border-color .15s, transform .15s;
+  }
+  .card:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-2px); }
+  .card .repo { font-family: var(--mono); font-size: 12px; color: var(--faint); margin-bottom: 14px; }
+  .card h3 { margin: 0 0 8px; font-size: 18px; font-weight: 650; letter-spacing: -.01em; }
+  .card p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.55; }
+  .card .arrow { display: block; margin-top: 16px; color: var(--accent); font-size: 14px; }
+
+  /* lexicon */
+  dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; column-gap: 32px; row-gap: 0; }
+  dt, dd { padding: 14px 0; border-top: 1px solid var(--line); margin: 0; }
+  dt { font-family: var(--mono); font-size: 15px; color: var(--accent); font-weight: 600; }
+  dd { color: var(--muted); max-width: 62ch; }
+  dt:nth-of-type(1), dd:nth-of-type(1) { border-top: 0; }
+  @media (max-width: 520px) {
+    dl { grid-template-columns: 1fr; }
+    dt { padding-bottom: 2px; } dd { border-top: 0; padding-top: 0; }
+  }
+
+  /* enroll */
+  .enroll-box {
+    background: var(--bg-2); border: 1px solid var(--line); border-radius: 12px; padding: 32px;
+  }
+  .enroll-box p { margin: 0 0 22px; color: var(--muted); max-width: 60ch; }
+  form { display: flex; gap: 10px; flex-wrap: wrap; }
+  input[type=email] {
+    flex: 1 1 260px; min-width: 0;
+    padding: 13px 16px; border-radius: 6px; font-size: 16px; font-family: var(--sans);
+    background: var(--bg); color: var(--text); border: 1px solid var(--line); outline: none;
+  }
+  input[type=email]:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(127,209,185,.18); }
+  input[type=email]::placeholder { color: var(--faint); }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+  #status { margin-top: 14px; font-family: var(--mono); font-size: 13.5px; min-height: 1.4em; color: var(--muted); }
+  #status.ok { color: var(--accent); }
+  #status.err { color: #ff8a7a; }
+
+  /* footer */
+  footer { padding: 40px 0 56px; border-top: 1px solid var(--line); color: var(--faint); font-size: 14px; }
+  footer p { margin: 0 0 10px; max-width: 70ch; }
+  footer .promise { color: var(--muted); }
+  footer .copy { font-family: var(--mono); font-size: 12px; letter-spacing: .04em; }
+
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .card:hover { transform: none; } }
 </style>
 </head>
 <body>
 
+<nav class="nav" aria-label="Site">
+  <div class="wrap">
+    <div class="brand"><b>Mesh</b> Republic</div>
+    <ul>
+      <li><a href="#premise">Premise</a></li>
+      <li><a href="#real">What's real</a></li>
+      <li><a href="#papers">Canon</a></li>
+      <li><a href="#lexicon">Lexicon</a></li>
+      <li><a href="#enroll">Enroll</a></li>
+    </ul>
+  </div>
+</nav>
+
 <header class="hero">
-  <div class="wrap hero-grid">
-    <canvas id="mset" width="400" height="400" aria-label="The Mandelbrot set, rendered live by this page from one iterated rule" role="img"></canvas>
-    <div>
-      <h1>The Mesh Republic</h1>
-      <p class="thesis">A novel about curing corruption by rebuilding governance from the self outward; and the working code that makes it more than a novel.</p>
-      <div class="cta">
-        <a class="btn primary" href="https://a.co/d/01r4qP5P">Get the book</a>
-        <a class="btn" href="#papers">Read the papers</a>
-      </div>
+  <canvas id="fractal" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <p class="eyebrow">A novel &amp; a working protocol</p>
+    <h1>The Mesh Republic</h1>
+    <p class="lede">A novel about curing corruption by rebuilding governance from the self outward; and the working code that makes it more than a novel.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="https://a.co/d/01r4qP5P" rel="noopener">Get the book</a>
+      <a class="btn btn-ghost" href="#papers">Read the papers</a>
     </div>
+    <p class="byline">BY <span>L. RYAN HANSEN</span> &nbsp;·&nbsp; THE SET BEHIND THIS TEXT WAS COMPUTED BY YOUR BROWSER JUST NOW</p>
   </div>
 </header>
 
 <main>
-<section class="wrap">
-  <h2>The premise</h2>
-  <p>Every top-down identity system eventually serves whoever sits at the top. <em>The Mesh Republic</em> inverts the stack: identity begins at the self, each citizen is their own certificate authority, money is minted from personhood rather than capital, and the whole record is witnessed by Bitcoin, the hardest ledger humans have built. The square to the left is the Mandelbrot set, drawn by your browser just now from one iterated rule; infinite unique structure from a single simple law is the entire thesis, and it is why the Republic's currency carries the name.</p>
-  <div class="excerpt">
-    <p>Replace this block with the Chapter One excerpt before launch.</p>
+
+<section id="premise">
+  <div class="wrap grid">
+    <p class="label">01 <small>The premise</small></p>
+    <div class="prose">
+      <h2>Identity begins at the self.</h2>
+      <p>Every top-down identity system eventually serves whoever sits at the top. <em>The Mesh Republic</em> inverts the stack: identity begins at the self, each citizen is their own certificate authority, money is minted from personhood rather than capital, and the whole record is witnessed by Bitcoin, the hardest ledger humans have built. The field behind the title above is the Mandelbrot set, drawn by your browser just now from one iterated rule; infinite unique structure from a single simple law is the entire thesis, and it is why the Republic's currency carries the name.</p>
+      <div class="placeholder">Replace this block with the Chapter One excerpt before launch.</div>
+    </div>
   </div>
 </section>
 
-<section class="wrap">
-  <h2>What is already real</h2>
-  <p>This project ships code, not just fiction. Kudzu, the constitutional AI described in the book, runs today: 23,000 lines of Elixir enforcing pluggable constitutions with fail-closed denial and a full audit trail. When its judge is unreachable, it refuses rather than permits. From the live logs:</p>
-  <div class="denial">PROPOSAL: Require government licenses for ordinary speech in public forums.<br>DECISION: <b>denied</b>, fail_closed:judge_not_configured, principle=<b>free_speech</b><br>"denying rather than permitting unjudged"</div>
-  <p class="muted">Next on the roadmap, in order: distilled governance constitutions, Autonym identity chains with Bitcoin anchoring, and the Mandelbrots provisional ledger. This page will show the Republic's latest Bitcoin anchor the day one exists.</p>
+<section id="real">
+  <div class="wrap grid">
+    <p class="label">02 <small>What is already real</small></p>
+    <div class="prose">
+      <h2>This project ships code, not just fiction.</h2>
+      <p>Kudzu, the constitutional AI described in the book, runs today: 23,000 lines of Elixir enforcing pluggable constitutions with fail-closed denial and a full audit trail. When its judge is unreachable, it refuses rather than permits. From the live logs:</p>
+<div class="log"><span class="k">PROPOSAL:</span> Require government licenses for ordinary speech in public forums.
+<span class="k">DECISION:</span> <span class="d">denied</span>, fail_closed:judge_not_configured, principle=<span class="p">free_speech</span>
+<span class="q">"denying rather than permitting unjudged"</span></div>
+      <p>Next on the roadmap, in order: distilled governance constitutions, Autonym identity chains with Bitcoin anchoring, and the Mandelbrots provisional ledger. This page will show the Republic's latest Bitcoin anchor the day one exists.</p>
+    </div>
+  </div>
 </section>
 
-<section class="wrap" id="papers">
-  <h2>The canon</h2>
-  <ul class="plain">
-    <li><a href="https://github.com/meshrepublic/mesh-republic-whitepaper">The Mesh Republic whitepaper</a><div class="what">Governance, token economics, Bitcoin Layer 1 anchoring, the security ratchet.</div></li>
-    <li><a href="https://github.com/meshrepublic/Autonym">The Autonym whitepaper</a><div class="what">Self-sovereign identity; every person their own certificate authority; the enrollment oracle.</div></li>
-    <li><a href="https://github.com/meshrepublic/kudzu">Kudzu</a><div class="what">The constitutional AI platform, running in production. Elixir, BEAM, holographic memory.</div></li>
-  </ul>
+<section id="papers">
+  <div class="wrap">
+    <div class="grid" style="margin-bottom:32px">
+      <p class="label">03 <small>The canon</small></p>
+      <h2 style="margin:0">Three repositories. One stack.</h2>
+    </div>
+    <div class="cards">
+      <a class="card" href="https://github.com/meshrepublic/mesh-republic-whitepaper" rel="noopener">
+        <div class="repo">meshrepublic / mesh-republic-whitepaper</div>
+        <h3>The Mesh Republic whitepaper</h3>
+        <p>Governance, token economics, Bitcoin Layer 1 anchoring, the security ratchet.</p>
+        <span class="arrow">Read on GitHub →</span>
+      </a>
+      <a class="card" href="https://github.com/meshrepublic/Autonym" rel="noopener">
+        <div class="repo">meshrepublic / Autonym</div>
+        <h3>The Autonym whitepaper</h3>
+        <p>Self-sovereign identity; every person their own certificate authority; the enrollment oracle.</p>
+        <span class="arrow">Read on GitHub →</span>
+      </a>
+      <a class="card" href="https://github.com/meshrepublic/kudzu" rel="noopener">
+        <div class="repo">meshrepublic / kudzu</div>
+        <h3>Kudzu</h3>
+        <p>The constitutional AI platform, running in production. Elixir, BEAM, holographic memory.</p>
+        <span class="arrow">Read on GitHub →</span>
+      </a>
+    </div>
+  </div>
 </section>
 
-<section class="wrap">
-  <h2>Speak Republic</h2>
-  <dl class="gloss">
-    <dt>Autonym</dt><dd>your self-named, self-rooted identity; soulbound, it hardens with time</dd>
-    <dt>mandelbrot</dt><dd>the currency; 1 mandelbrot = 100,000,000 brots</dd>
-    <dt>brot</dt><dd>the base unit; literally bread, your daily bread of the Republic</dd>
-    <dt>Kudzu</dt><dd>the constitutional AI that earns its keep and cannot be bought</dd>
-    <dt>the ratchet</dt><dd>anchoring that only relaxes under proven security, never by vote</dd>
-    <dt>VCP</dt><dd>Value Communications Protocol; the brot is a wire for value, not a warehouse</dd>
-  </dl>
+<section id="lexicon">
+  <div class="wrap grid">
+    <p class="label">04 <small>Speak Republic</small></p>
+    <div>
+      <h2>A short lexicon.</h2>
+      <dl>
+        <dt>Autonym</dt><dd>your self-named, self-rooted identity; soulbound, it hardens with time</dd>
+        <dt>mandelbrot</dt><dd>the currency; 1 mandelbrot = 100,000,000 brots</dd>
+        <dt>brot</dt><dd>the base unit; literally bread, your daily bread of the Republic</dd>
+        <dt>Kudzu</dt><dd>the constitutional AI that earns its keep and cannot be bought</dd>
+        <dt>the ratchet</dt><dd>anchoring that only relaxes under proven security, never by vote</dd>
+        <dt>VCP</dt><dd>Value Communications Protocol; the brot is a wire for value, not a warehouse</dd>
+      </dl>
+    </div>
+  </div>
 </section>
 
-<section class="wrap">
-  <h2>Enroll for dispatches</h2>
-  <p class="muted">Occasional letters from the Republic: build milestones, the first anchors, enrollment ceremonies when they begin. Your address is stored on infrastructure we control and is never shared or sold.</p>
-  <form class="enroll" id="enroll">
-    <label class="hp" aria-hidden="true">Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label>
-    <input type="email" name="email" required placeholder="you@example.org" aria-label="Email address">
-    <button class="btn primary" type="submit">Enroll</button>
-  </form>
-  <p id="enroll-msg" role="status"></p>
+<section id="enroll">
+  <div class="wrap grid">
+    <p class="label">05 <small>Enroll for dispatches</small></p>
+    <div class="enroll-box">
+      <h2>Occasional letters from the Republic.</h2>
+      <p>Build milestones, the first anchors, enrollment ceremonies when they begin. Your address is stored on infrastructure we control and is never shared or sold.</p>
+      <form id="enroll-form" novalidate>
+        <label class="hp" aria-hidden="true">Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+        <input type="email" id="email" name="email" placeholder="you@example.org" autocomplete="email" required aria-label="Email address">
+        <button class="btn btn-primary" type="submit">Enroll</button>
+      </form>
+      <div id="status" role="status" aria-live="polite"></div>
+    </div>
+  </div>
 </section>
+
 </main>
 
 <footer>
   <div class="wrap">
-    <p>This page makes zero third-party requests. No analytics, no trackers, no cookies, no consent banner required. The fractal is computed on your machine; your reading habits are your own. That is the point of the book.</p>
-    <p>&copy; 2026 L. Ryan Hansen. The Mesh Republic.</p>
+    <p class="promise">This page makes zero third-party requests. No analytics, no trackers, no cookies, no consent banner required. The fractal is computed on your machine; your reading habits are your own. That is the point of the book.</p>
+    <p class="copy">© 2026 L. RYAN HANSEN. THE MESH REPUBLIC.</p>
   </div>
 </footer>
 
 <script>
-(function(){
-  var c=document.getElementById('mset'),x=c.getContext('2d'),W=c.width,H=c.height;
-  var img=x.createImageData(W,H),d=img.data;
-  // palette: ink -> indigo -> verdigris -> parchment
-  function pal(t){
-    var stops=[[16,24,34],[42,58,74],[111,160,140],[234,228,211]];
-    var s=t*(stops.length-1),i=Math.min(Math.floor(s),stops.length-2),f=s-i;
-    var a=stops[i],b=stops[i+1];
-    return [a[0]+(b[0]-a[0])*f, a[1]+(b[1]-a[1])*f, a[2]+(b[2]-a[2])*f];
+(function () {
+  /* ---------- Mandelbrot hero: one iterated rule, computed locally ---------- */
+  var canvas = document.getElementById('fractal');
+  var ctx = canvas.getContext('2d', { alpha: false });
+  var MAX_ITER = 160;
+  var timer = null;
+
+  // Palette: deep navy -> teal -> pale mint, interior is near-black.
+  function color(t) { // t in [0,1)
+    var r, g, b;
+    if (t < 0.45) { var u = t / 0.45;  r = 11 + u * (22 - 11);  g = 15 + u * (110 - 15);  b = 20 + u * (112 - 20); }
+    else          { var v = (t - 0.45) / 0.55; r = 22 + v * (190 - 22); g = 110 + v * (236 - 110); b = 112 + v * (220 - 112); }
+    return [r, g, b];
   }
-  var cx=-0.6,cy=0,scale=3.0,maxI=160;
-  for(var py=0;py<H;py++){
-    for(var px=0;px<W;px++){
-      var x0=cx+(px/W-0.5)*scale, y0=cy+(py/H-0.5)*scale;
-      var zx=0,zy=0,i=0;
-      while(zx*zx+zy*zy<=4&&i<maxI){var t=zx*zx-zy*zy+x0;zy=2*zx*zy+y0;zx=t;i++;}
-      var o=(py*W+px)*4;
-      if(i===maxI){d[o]=16;d[o+1]=24;d[o+2]=34;}
-      else{var sm=i-Math.log2(Math.log2(zx*zx+zy*zy)/2||1)||i;
-           var col=pal(Math.pow(Math.min(sm/maxI*2.4,1),0.5));
-           d[o]=col[0];d[o+1]=col[1];d[o+2]=col[2];}
-      d[o+3]=255;
+
+  function render() {
+    var rect = canvas.getBoundingClientRect();
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Render at a reduced resolution and let the browser upscale; keeps it fast everywhere.
+    var scale = 0.55;
+    var W = Math.max(1, Math.floor(rect.width * dpr * scale));
+    var H = Math.max(1, Math.floor(rect.height * dpr * scale));
+    canvas.width = W; canvas.height = H;
+
+    // Viewport: put the set's main cardioid on the right third of the hero.
+    var aspect = W / H;
+    var spanY, spanX, cxCenter;
+    if (aspect >= 1) {
+      spanY = 2.4; spanX = spanY * aspect;
+      cxCenter = -0.6 - spanX * 0.22; // the set sits in the right third
+    } else {
+      spanX = 3.0; spanY = spanX / aspect; // phones: whole set, centred behind the text
+      cxCenter = -0.7;
     }
+    var cyCenter = 0;
+    var x0 = cxCenter - spanX / 2, y0 = cyCenter - spanY / 2;
+
+    var img = ctx.createImageData(W, H);
+    var d = img.data;
+    var LOG2 = Math.log(2);
+    var k = 0;
+    for (var py = 0; py < H; py++) {
+      var ci = y0 + (py / H) * spanY;
+      for (var px = 0; px < W; px++) {
+        var cr = x0 + (px / W) * spanX;
+        // Quick interior tests (cardioid + period-2 bulb) so the body stays cheap.
+        var q = (cr - 0.25) * (cr - 0.25) + ci * ci;
+        var inside = q * (q + (cr - 0.25)) < 0.25 * ci * ci || (cr + 1) * (cr + 1) + ci * ci < 0.0625;
+        var zr = 0, zi = 0, n = 0;
+        if (!inside) {
+          while (n < MAX_ITER && zr * zr + zi * zi < 16) {
+            var t = zr * zr - zi * zi + cr;
+            zi = 2 * zr * zi + ci; zr = t; n++;
+          }
+        } else { n = MAX_ITER; }
+        var r, g, b;
+        if (n >= MAX_ITER) { r = 6; g = 9; b = 13; }
+        else {
+          var mu = n + 1 - Math.log(Math.log(Math.sqrt(zr * zr + zi * zi))) / LOG2;
+          var tt = Math.pow(Math.max(0, mu) / MAX_ITER, 0.55);
+          var c = color(Math.min(0.999, tt));
+          r = c[0]; g = c[1]; b = c[2];
+        }
+        d[k++] = r; d[k++] = g; d[k++] = b; d[k++] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
   }
-  x.putImageData(img,0,0);
-})();
-(function(){
-  var f=document.getElementById('enroll'),m=document.getElementById('enroll-msg');
-  f.addEventListener('submit',function(e){
+
+  function schedule() { clearTimeout(timer); timer = setTimeout(render, 120); }
+  render();
+  window.addEventListener('resize', schedule);
+
+  /* ---------- Enrollment form -> POST /api/subscribe (same origin, KV-backed) ---------- */
+  var form = document.getElementById('enroll-form');
+  var email = document.getElementById('email');
+  var status = document.getElementById('status');
+  var button = form.querySelector('button');
+
+  function say(msg, cls) { status.textContent = msg; status.className = cls || ''; }
+
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
-    var email=f.email.value.trim(), hp=f.website.value;
-    m.textContent='';
-    fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({email:email,website:hp})})
-    .then(function(r){return r.json().catch(function(){return{}}).then(function(j){return{ok:r.ok,j:j}})})
-    .then(function(res){
-      if(res.ok){m.textContent='Enrolled. Welcome to the roll.';f.reset();}
-      else{m.textContent=(res.j&&res.j.error)||'The scribe is unavailable. Try again shortly.';}
-    })
-    .catch(function(){m.textContent='The scribe is unavailable. Try again shortly.';});
+    var hp = form.querySelector('input[name=website]');
+    if (hp && hp.value) { say('Enrolled. Welcome to the roll.', 'ok'); return; } // bot trap: pretend success
+    var value = (email.value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) { say('That address does not look right.', 'err'); email.focus(); return; }
+    button.disabled = true; say('Enrolling…');
+    fetch('/api/subscribe', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ email: value })
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (j) { return { ok: r.ok, body: j }; });
+    }).then(function (res) {
+      if (res.ok) { say('Enrolled. Welcome to the roll.', 'ok'); email.value = ''; }
+      else { say(res.body && res.body.error ? res.body.error : 'Something went wrong. Try again in a moment.', 'err'); }
+    }).catch(function () {
+      say('Could not reach the Republic. Try again in a moment.', 'err');
+    }).then(function () { button.disabled = false; });
   });
 })();
 </script>
